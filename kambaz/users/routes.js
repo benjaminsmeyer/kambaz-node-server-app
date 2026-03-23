@@ -1,19 +1,46 @@
 import UsersDao from "./dao.js";
 export default function UserRoutes(app, db) {
   const dao = UsersDao(db);
+
+  const requireFaculty = (req, res, next) => {
+    const currentUser = req.session["currentUser"];
+    if (!currentUser) {
+      res.sendStatus(401);
+      return;
+    }
+    if (currentUser.role !== "FACULTY") {
+      res.sendStatus(403);
+      return;
+    }
+    next();
+  };
+
   const createUser = (req, res) => {
     const user = dao.createUser(req.body);
     res.json(user);
   };
+
   const deleteUser = (req, res) => {
     const { userId } = req.params;
-    const status = dao.deleteUser(userId);
-    res.json(status);
+    const deletedUser = dao.deleteUser(userId);
+    if (!deletedUser) {
+      res.status(404).send("User not found");
+      return;
+    }
+    res.json(deletedUser);
   };
+
   const findAllUsers = (req, res) => {
     const users = dao.findAllUsers();
     res.json(users);
   };
+
+  const findUsersForCourse = (req, res) => {
+    const { courseId } = req.params;
+    const users = dao.findUsersForCourse(courseId);
+    res.json(users);
+  };
+
   const findUserById = (req, res) => {
     const { userId } = req.params;
     const user = dao.findUserById(userId);
@@ -23,14 +50,22 @@ export default function UserRoutes(app, db) {
     }
     res.json(user);
   };
+
   const updateUser = (req, res) => {
     const userId = req.params.userId;
     const userUpdates = req.body;
-    dao.updateUser(userId, userUpdates);
-    const currentUser = dao.findUserById(userId);
-    req.session["currentUser"] = currentUser;
-    res.json(currentUser);
+    const updatedUser = dao.updateUser(userId, userUpdates);
+    if (!updatedUser) {
+      res.status(404).send("User not found");
+      return;
+    }
+    const currentUser = req.session["currentUser"];
+    if (currentUser && currentUser._id === userId) {
+      req.session["currentUser"] = updatedUser;
+    }
+    res.json(updatedUser);
   };
+
   const signup = (req, res) => {
     const user = dao.findUserByUsername(req.body.username);
     if (user) {
@@ -64,11 +99,13 @@ export default function UserRoutes(app, db) {
     }
     res.json(currentUser);
   };
-  app.post("/api/users", createUser);
+
+  app.get("/api/courses/:courseId/users", findUsersForCourse);
+  app.post("/api/users", requireFaculty, createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
-  app.put("/api/users/:userId", updateUser);
-  app.delete("/api/users/:userId", deleteUser);
+  app.put("/api/users/:userId", requireFaculty, updateUser);
+  app.delete("/api/users/:userId", requireFaculty, deleteUser);
   app.post("/api/users/signup", signup);
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
