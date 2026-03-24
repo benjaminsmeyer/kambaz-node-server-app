@@ -15,6 +15,22 @@ export default function UserRoutes(app, db) {
     next();
   };
 
+  const requireSelfOrFaculty = (req, res, next) => {
+    const currentUser = req.session["currentUser"];
+    if (!currentUser) {
+      res.sendStatus(401);
+      return;
+    }
+    if (
+      currentUser.role === "FACULTY" ||
+      currentUser._id === req.params.userId
+    ) {
+      next();
+      return;
+    }
+    res.sendStatus(403);
+  };
+
   const createUser = (req, res) => {
     const user = dao.createUser(req.body);
     res.json(user);
@@ -100,14 +116,26 @@ export default function UserRoutes(app, db) {
     res.json(currentUser);
   };
 
+  const updateProfile = (req, res) => {
+    const currentUser = req.session["currentUser"];
+    if (!currentUser) {
+      res.sendStatus(401);
+      return;
+    }
+    const updatedUser = dao.updateUser(currentUser._id, req.body);
+    req.session["currentUser"] = updatedUser;
+    res.json(updatedUser);
+  };
+
   app.get("/api/courses/:courseId/users", findUsersForCourse);
   app.post("/api/users", requireFaculty, createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
-  app.put("/api/users/:userId", requireFaculty, updateUser);
+  app.put("/api/users/:userId", requireSelfOrFaculty, updateUser);
   app.delete("/api/users/:userId", requireFaculty, deleteUser);
   app.post("/api/users/signup", signup);
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
+  app.put("/api/users/profile", updateProfile);
 }
