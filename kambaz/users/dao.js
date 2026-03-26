@@ -1,4 +1,5 @@
 import model from "./model.js";
+import enrollmentModel from "../enrollments/model.js";
 import { v4 as uuidv4 } from "uuid";
 export default function UsersDao(db) {
   const findUsersByRole = (role) => model.find({ role: role });
@@ -12,10 +13,11 @@ export default function UsersDao(db) {
     model.findOne({ username: username });
   const findUserByCredentials = (username, password) =>
     model.findOne({ username, password });
-  const findUsersForCourse = (courseId) => {
-    const enrolledUserIds = db.enrollments
-      .filter((enrollment) => enrollment.course === courseId)
-      .map((enrollment) => enrollment.user);
+  const findUsersForCourse = async (courseId) => {
+    const enrollments = await enrollmentModel
+      .find({ course: courseId })
+      .select("user");
+    const enrolledUserIds = enrollments.map((enrollment) => enrollment.user);
     return model.find({ _id: { $in: enrolledUserIds } });
   };
   const updateUser = (userId, user) =>

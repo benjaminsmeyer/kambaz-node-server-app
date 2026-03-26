@@ -50,8 +50,12 @@ export default function AssignmentRoutes(app, db) {
 
   const deleteAssignment = async (req, res) => {
     const { assignmentId } = req.params;
-    const status = await dao.deleteAssignment(assignmentId);
-    res.json(status);
+    const deleted = await dao.deleteAssignment(assignmentId);
+    if (!deleted) {
+      res.status(404).send("Assignment not found");
+      return;
+    }
+    res.json(deleted);
   };
 
   app.post("/api/assignments", createAssignment);

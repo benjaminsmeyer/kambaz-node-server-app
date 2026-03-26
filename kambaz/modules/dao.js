@@ -1,33 +1,49 @@
 import { v4 as uuidv4 } from "uuid";
 
 export default function ModulesDao(db) {
-  let { modules } = db;
-
-  const findAllModules = () => modules;
+  const findAllModules = () => db.modules;
   const findModuleById = (moduleId) =>
-    modules.find((module) => module._id === moduleId);
+    db.modules.find((module) => module._id === moduleId);
 
-  function createModule(module) {
-    const newModule = { ...module, _id: uuidv4() };
+  function createModule(courseId, module) {
+    const newModule = { ...module, _id: uuidv4(), course: courseId };
     db.modules = [...db.modules, newModule];
     return newModule;
   }
 
-  function updateModule(moduleId, moduleUpdates) {
-    const { modules } = db;
-    const module = modules.find((module) => module._id === moduleId);
-    Object.assign(module, moduleUpdates);
-    return module;
+  function updateModule(courseId, moduleId, moduleUpdates) {
+    let updatedModule = null;
+    db.modules = db.modules.map((module) => {
+      const matchesCourse = courseId ? module.course === courseId : true;
+      if (module._id !== moduleId || !matchesCourse) {
+        return module;
+      }
+      updatedModule = {
+        ...module,
+        ...moduleUpdates,
+        _id: moduleId,
+        course: module.course,
+      };
+      return updatedModule;
+    });
+    return updatedModule;
   }
 
-  function deleteModule(moduleId) {
-    const { modules } = db;
-    db.modules = modules.filter((module) => module._id !== moduleId);
+  function deleteModule(courseId, moduleId) {
+    const deletedModule = db.modules.find(
+      (module) =>
+        module._id === moduleId &&
+        (courseId ? module.course === courseId : true),
+    );
+    if (!deletedModule) {
+      return null;
+    }
+    db.modules = db.modules.filter((module) => module._id !== moduleId);
+    return deletedModule;
   }
 
   function findModulesForCourse(courseId) {
-    const { modules } = db;
-    return modules.filter((module) => module.course === courseId);
+    return db.modules.filter((module) => module.course === courseId);
   }
 
   return {

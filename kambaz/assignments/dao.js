@@ -1,39 +1,49 @@
 import { v4 as uuidv4 } from "uuid";
+import model from "./model.js";
+import seedAssignments from "../database/assignments.js";
 
 export default function AssignmentsDao(db) {
-  let { assignments } = db;
+  async function seedIfNeeded() {
+    const count = await model.countDocuments();
+    if (count === 0) {
+      await model.insertMany(seedAssignments);
+    }
+  }
 
-  const createAssignment = (assignment) => {
+  const createAssignment = async (assignment) => {
+    await seedIfNeeded();
     const newAssignment = { ...assignment, _id: uuidv4() };
-    assignments = [...assignments, newAssignment];
-    return newAssignment;
+    return model.create(newAssignment);
   };
 
-  const findAssignmentsForCourse = (courseId) =>
-    assignments.filter((assignment) => assignment.course === courseId);
-
-  const findAllAssignments = () => assignments;
-  const findAssignmentById = (assignmentId) =>
-    assignments.find((assignment) => assignment._id === assignmentId);
-
-  const updateAssignment = (assignmentId, assignmentUpdates) => {
-    let updatedAssignment = null;
-    assignments = assignments.map((assignment) => {
-      if (assignment._id !== assignmentId) {
-        return assignment;
-      }
-      updatedAssignment = {
-        ...assignment,
-        ...assignmentUpdates,
-        _id: assignmentId,
-      };
-      return updatedAssignment;
-    });
-    return updatedAssignment;
+  const findAssignmentsForCourse = async (courseId) => {
+    await seedIfNeeded();
+    return model.find({ course: courseId });
   };
 
-  const deleteAssignment = (assignmentId) =>
-    (assignments = assignments.filter((a) => a._id !== assignmentId));
+  const findAllAssignments = async () => {
+    await seedIfNeeded();
+    return model.find();
+  };
+
+  const findAssignmentById = async (assignmentId) => {
+    await seedIfNeeded();
+    return model.findById(assignmentId);
+  };
+
+  const updateAssignment = async (assignmentId, assignmentUpdates) => {
+    await seedIfNeeded();
+    return model.findByIdAndUpdate(
+      assignmentId,
+      { $set: assignmentUpdates },
+      { new: true },
+    );
+  };
+
+  const deleteAssignment = async (assignmentId) => {
+    await seedIfNeeded();
+    return model.findByIdAndDelete(assignmentId);
+  };
 
   return {
     createAssignment,
