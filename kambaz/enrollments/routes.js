@@ -15,19 +15,19 @@ export default function EnrollmentRoutes(app, db) {
     return currentUser._id;
   };
 
-  const createEnrollment = (req, res) => {
-    const enrollment = dao.createEnrollment(req.body);
+  const createEnrollment = async (req, res) => {
+    const enrollment = await dao.createEnrollment(req.body);
     res.json(enrollment);
   };
 
-  const findAllEnrollments = (req, res) => {
-    const enrollments = dao.findAllEnrollments();
+  const findAllEnrollments = async (req, res) => {
+    const enrollments = await dao.findAllEnrollments();
     res.json(enrollments);
   };
 
-  const findEnrollmentById = (req, res) => {
+  const findEnrollmentById = async (req, res) => {
     const { enrollmentId } = req.params;
-    const enrollment = dao.findEnrollmentById(enrollmentId);
+    const enrollment = await dao.findEnrollmentById(enrollmentId);
     if (!enrollment) {
       res.status(404).send("Enrollment not found");
       return;
@@ -35,9 +35,9 @@ export default function EnrollmentRoutes(app, db) {
     res.json(enrollment);
   };
 
-  const updateEnrollment = (req, res) => {
+  const updateEnrollment = async (req, res) => {
     const { enrollmentId } = req.params;
-    const updated = dao.updateEnrollment(enrollmentId, req.body);
+    const updated = await dao.updateEnrollment(enrollmentId, req.body);
     if (!updated) {
       res.status(404).send("Enrollment not found");
       return;
@@ -45,9 +45,9 @@ export default function EnrollmentRoutes(app, db) {
     res.json(updated);
   };
 
-  const deleteEnrollment = (req, res) => {
+  const deleteEnrollment = async (req, res) => {
     const { enrollmentId } = req.params;
-    const deleted = dao.deleteEnrollment(enrollmentId);
+    const deleted = await dao.deleteEnrollment(enrollmentId);
     if (!deleted) {
       res.status(404).send("Enrollment not found");
       return;
@@ -55,38 +55,38 @@ export default function EnrollmentRoutes(app, db) {
     res.json(deleted);
   };
 
-  const findEnrollmentsForUser = (req, res) => {
+  const findEnrollmentsForUser = async (req, res) => {
     const userId = resolveUserId(req.params.userId, req, res);
     if (!userId) {
       return;
     }
-    const enrollments = dao.findEnrollmentsForUser(userId);
+    const enrollments = await dao.findEnrollmentsForUser(userId);
     res.json(enrollments);
   };
 
-  const findEnrollmentsForCourse = (req, res) => {
+  const findEnrollmentsForCourse = async (req, res) => {
     const { courseId } = req.params;
-    const enrollments = dao.findEnrollmentsForCourse(courseId);
+    const enrollments = await dao.findEnrollmentsForCourse(courseId);
     res.json(enrollments);
   };
 
-  const enrollUserInCourse = (req, res) => {
+  const enrollUserInCourse = async (req, res) => {
     const userId = resolveUserId(req.params.userId, req, res);
     if (!userId) {
       return;
     }
     const { courseId } = req.params;
-    const enrollment = dao.enrollUserInCourse(userId, courseId);
+    const enrollment = await dao.enrollUserInCourse(userId, courseId);
     res.json(enrollment);
   };
 
-  const unenrollUserFromCourse = (req, res) => {
+  const unenrollUserFromCourse = async (req, res) => {
     const userId = resolveUserId(req.params.userId, req, res);
     if (!userId) {
       return;
     }
     const { courseId } = req.params;
-    const enrollment = dao.unenrollUserFromCourse(userId, courseId);
+    const enrollment = await dao.unenrollUserFromCourse(userId, courseId);
     if (!enrollment) {
       res.status(404).send("Enrollment not found");
       return;
