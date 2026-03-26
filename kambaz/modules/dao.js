@@ -12,17 +12,24 @@ export default function ModulesDao(db) {
   }
 
   function updateModule(courseId, moduleId, moduleUpdates) {
+    const exactMatchExists = db.modules.some(
+      (module) =>
+        module._id === moduleId &&
+        (courseId ? module.course === courseId : true),
+    );
     let updatedModule = null;
     db.modules = db.modules.map((module) => {
-      const matchesCourse = courseId ? module.course === courseId : true;
-      if (module._id !== moduleId || !matchesCourse) {
+      if (module._id !== moduleId) {
+        return module;
+      }
+      if (exactMatchExists && courseId && module.course !== courseId) {
         return module;
       }
       updatedModule = {
         ...module,
         ...moduleUpdates,
         _id: moduleId,
-        course: module.course,
+        course: module.course || courseId,
       };
       return updatedModule;
     });
@@ -30,11 +37,14 @@ export default function ModulesDao(db) {
   }
 
   function deleteModule(courseId, moduleId) {
-    const deletedModule = db.modules.find(
+    let deletedModule = db.modules.find(
       (module) =>
         module._id === moduleId &&
         (courseId ? module.course === courseId : true),
     );
+    if (!deletedModule) {
+      deletedModule = db.modules.find((module) => module._id === moduleId);
+    }
     if (!deletedModule) {
       return null;
     }
