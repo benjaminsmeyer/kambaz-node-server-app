@@ -1,12 +1,16 @@
 import model from "./model.js";
-
-export async function findCoursesForUser(userId) {
-  const enrollments = await model.find({ user: userId }).populate("course");
-  return enrollments.map((enrollment) => enrollment.course);
-}
+import seedEnrollments from "../database/enrollments.js";
 
 export default function EnrollmentsDao(db) {
+  async function seedIfNeeded() {
+    const count = await model.countDocuments();
+    if (count === 0) {
+      await model.insertMany(seedEnrollments);
+    }
+  }
+
   async function findCoursesForUser(userId) {
+    await seedIfNeeded();
     const enrollments = await model.find({ user: userId }).populate("course");
     return enrollments.map((enrollment) => enrollment.course);
   }
@@ -22,7 +26,8 @@ export default function EnrollmentsDao(db) {
     return model.create({ ...enrollment, _id: enrollmentId });
   }
 
-  function findAllEnrollments() {
+  async function findAllEnrollments() {
+    await seedIfNeeded();
     return model.find();
   }
 
@@ -30,11 +35,13 @@ export default function EnrollmentsDao(db) {
     return model.findById(enrollmentId);
   }
 
-  function findEnrollmentsForUser(userId) {
+  async function findEnrollmentsForUser(userId) {
+    await seedIfNeeded();
     return model.find({ user: userId });
   }
 
-  function findEnrollmentsForCourse(courseId) {
+  async function findEnrollmentsForCourse(courseId) {
+    await seedIfNeeded();
     return model.find({ course: courseId });
   }
 

@@ -104,8 +104,6 @@ export default function UserRoutes(app, db) {
   app.get("/api/users", findAllUsers);
   app.get("/api/courses/:courseId/users", findUsersForCourse);
   app.post("/api/users", createUser);
-  app.get("/api/users", findAllUsers);
-  app.get("/api/users/:userId", findUserById);
   app.put("/api/users/:userId", updateUser);
   app.delete("/api/users/:userId", deleteUser);
   app.post("/api/users/signup", signup);
