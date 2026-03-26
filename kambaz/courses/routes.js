@@ -59,25 +59,6 @@ export default function CourseRoutes(app, db) {
     res.send(status);
   };
 
-  const enrollUserInCourse = async (req, res) => {
-    let { uid, cid } = req.params;
-    if (uid === "current") {
-      const currentUser = req.session["currentUser"];
-      uid = currentUser._id;
-    }
-    const status = await enrollmentsDao.enrollUserInCourse(uid, cid);
-    res.send(status);
-  };
-  const unenrollUserFromCourse = async (req, res) => {
-    let { uid, cid } = req.params;
-    if (uid === "current") {
-      const currentUser = req.session["currentUser"];
-      uid = currentUser._id;
-    }
-    const status = await enrollmentsDao.unenrollUserFromCourse(uid, cid);
-    res.send(status);
-  };
-
   const findUsersForCourse = async (req, res) => {
     const { cid } = req.params;
     const users = await enrollmentsDao.findUsersForCourse(cid);
