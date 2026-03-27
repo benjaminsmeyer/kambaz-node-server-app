@@ -1,0 +1,614 @@
+// Sample attempts from enrolled students across representative quizzes.
+// Users: 234 = Bruce Wayne (STUDENT), 456 = Thor Odinson (STUDENT),
+//        567 = Bruce Banner (STUDENT), 890 = Legolas Greenleaf (STUDENT)
+export default [
+  // ── Q101  Rocket Propulsion Fundamentals ─────────────────────────────────
+  // Bruce Wayne — scores 5/8: gets MC wrong, rest correct
+  {
+    _id: "AT1011",
+    quiz: "Q101",
+    user: "234",
+    course: "RS101",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN1011",
+        blankAnswer: "Newton's Third Law",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN1012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN1013",
+        selectedChoice: "RP-1 kerosene and liquid oxygen",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-09T14:22:00Z"),
+  },
+  // Thor Odinson — scores 3/8: only gets True/False correct
+  {
+    _id: "AT1012",
+    quiz: "Q101",
+    user: "456",
+    course: "RS101",
+    attemptNumber: 1,
+    score: 3,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN1011",
+        blankAnswer: "momentum conservation",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+      {
+        question: "QN1012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN1013",
+        selectedChoice: "Hydrazine and nitrogen tetroxide",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-09T16:05:00Z"),
+  },
+  // Bruce Banner — perfect score 8/8
+  {
+    _id: "AT1013",
+    quiz: "Q101",
+    user: "567",
+    course: "RS101",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN1011",
+        blankAnswer: "Newton's Third Law",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN1012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN1013",
+        selectedChoice: "Liquid hydrogen and liquid oxygen",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-10T09:14:00Z"),
+  },
+
+  // ── Q102  Combustion and Nozzle Design (2 attempts allowed) ──────────────
+  // Bruce Wayne — attempt 1: 5/8, attempt 2: 8/8
+  {
+    _id: "AT1021",
+    quiz: "Q102",
+    user: "234",
+    course: "RS101",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN1021",
+        selectedChoice: "Liquid hydrogen and liquid oxygen",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+      {
+        question: "QN1022",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN1023",
+        blankAnswer: "specific impulse",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-15T11:00:00Z"),
+  },
+  {
+    _id: "AT1022",
+    quiz: "Q102",
+    user: "234",
+    course: "RS101",
+    attemptNumber: 2,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN1021",
+        selectedChoice: "To accelerate exhaust gases from subsonic to supersonic speeds",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN1022",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN1023",
+        blankAnswer: "specific impulse",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-16T10:30:00Z"),
+  },
+
+  // ── Q201  Aerodynamics Fundamentals ──────────────────────────────────────
+  // Bruce Wayne — scores 8/8
+  {
+    _id: "AT2011",
+    quiz: "Q201",
+    user: "234",
+    course: "RS102",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN2011",
+        selectedChoice: "Bernoulli's principle",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN2012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN2013",
+        blankAnswer: "stall",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-10T13:45:00Z"),
+  },
+  // Thor Odinson — scores 5/8: misses the T/F (guesses True instead of False)
+  {
+    _id: "AT2012",
+    quiz: "Q201",
+    user: "456",
+    course: "RS102",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN2011",
+        selectedChoice: "Bernoulli's principle",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN2012",
+        trueFalseAnswer: true,
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+      {
+        question: "QN2013",
+        blankAnswer: "stall",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-11T08:20:00Z"),
+  },
+
+  // ── Q301  Spacecraft Structural Design ───────────────────────────────────
+  // Bruce Banner — scores 8/8
+  {
+    _id: "AT3011",
+    quiz: "Q301",
+    user: "567",
+    course: "RS103",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN3011",
+        selectedChoice: "High strength-to-weight ratio",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN3012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN3013",
+        blankAnswer: "Hohmann",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-11T15:00:00Z"),
+  },
+  // Thor Odinson — scores 2/8: only gets T/F correct
+  {
+    _id: "AT3012",
+    quiz: "Q301",
+    user: "456",
+    course: "RS103",
+    attemptNumber: 1,
+    score: 2,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN3011",
+        selectedChoice: "High thermal conductivity",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+      {
+        question: "QN3012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN3013",
+        blankAnswer: "bi-elliptic transfer",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-12T09:30:00Z"),
+  },
+
+  // ── Q401  Functional Groups and Reactions ────────────────────────────────
+  // Bruce Wayne — scores 8/8
+  {
+    _id: "AT4011",
+    quiz: "Q401",
+    user: "234",
+    course: "RS104",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN4011",
+        selectedChoice: "Carboxylic acid",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN4012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN4013",
+        blankAnswer: "hydrogenation",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-12T14:00:00Z"),
+  },
+  // Bruce Banner — scores 5/8: misses the fill-in-the-blank
+  {
+    _id: "AT4012",
+    quiz: "Q401",
+    user: "567",
+    course: "RS104",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN4011",
+        selectedChoice: "Carboxylic acid",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN4012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN4013",
+        blankAnswer: "reduction",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-13T10:15:00Z"),
+  },
+
+  // ── Q501  Coordination Chemistry ─────────────────────────────────────────
+  // Bruce Banner — scores 8/8
+  {
+    _id: "AT5011",
+    quiz: "Q501",
+    user: "567",
+    course: "RS105",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN5011",
+        blankAnswer: "ligand",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN5012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN5013",
+        selectedChoice: "Octahedral",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-13T11:00:00Z"),
+  },
+
+  // ── Q601  Thermodynamics ──────────────────────────────────────────────────
+  // Bruce Wayne — scores 3/8: misses MC and fill-in-the-blank
+  {
+    _id: "AT6011",
+    quiz: "Q601",
+    user: "234",
+    course: "RS106",
+    attemptNumber: 1,
+    score: 3,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN6011",
+        selectedChoice: "The reaction is at equilibrium",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+      {
+        question: "QN6012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN6013",
+        blankAnswer: "Helmholtz",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-14T09:00:00Z"),
+  },
+  // Bruce Banner — scores 8/8
+  {
+    _id: "AT6012",
+    quiz: "Q601",
+    user: "567",
+    course: "RS106",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN6011",
+        selectedChoice: "The reaction is spontaneous",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN6012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN6013",
+        blankAnswer: "Gibbs",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-14T10:30:00Z"),
+  },
+
+  // ── Q701  Elvish Languages ────────────────────────────────────────────────
+  // Legolas — perfect score 8/8 (Elvish is his native domain)
+  {
+    _id: "AT7011",
+    quiz: "Q701",
+    user: "890",
+    course: "RS107",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN7011",
+        selectedChoice: "Quenya",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN7012",
+        trueFalseAnswer: false,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN7013",
+        blankAnswer: "Tengwar",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-08T08:00:00Z"),
+  },
+
+  // ── Q702  Dwarvish and the Black Speech ──────────────────────────────────
+  // Legolas — scores 5/8: gets the MC wrong (Elvish disdain for Ring lore)
+  {
+    _id: "AT7021",
+    quiz: "Q702",
+    user: "890",
+    course: "RS107",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN7021",
+        blankAnswer: "Khuzdul",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN7022",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN7023",
+        selectedChoice: "Three rings for the Elven-kings under the sky",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-15T09:00:00Z"),
+  },
+
+  // ── Q801  Alliances and Councils ─────────────────────────────────────────
+  // Legolas — scores 8/8
+  {
+    _id: "AT8011",
+    quiz: "Q801",
+    user: "890",
+    course: "RS108",
+    attemptNumber: 1,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN8011",
+        blankAnswer: "Council",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN8012",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN8013",
+        selectedChoice: "Saruman (Curunír)",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-10T07:30:00Z"),
+  },
+
+  // ── Q802  Conflicts and Resolutions ──────────────────────────────────────
+  // Legolas — attempt 1: 5/8 (misses fill-in-the-blank)
+  {
+    _id: "AT8021",
+    quiz: "Q802",
+    user: "890",
+    course: "RS108",
+    attemptNumber: 1,
+    score: 5,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN8021",
+        selectedChoice: "Thorin's refusal to share Smaug's recovered treasure with the Men of Lake-town and the Elves",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN8022",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN8023",
+        blankAnswer: "Treaty of Angrenost",
+        isCorrect: false,
+        pointsEarned: 0,
+      },
+    ],
+    submittedAt: new Date("2023-05-16T08:00:00Z"),
+  },
+  // Legolas — attempt 2: 8/8
+  {
+    _id: "AT8022",
+    quiz: "Q802",
+    user: "890",
+    course: "RS108",
+    attemptNumber: 2,
+    score: 8,
+    totalPoints: 8,
+    answers: [
+      {
+        question: "QN8021",
+        selectedChoice: "Thorin's refusal to share Smaug's recovered treasure with the Men of Lake-town and the Elves",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+      {
+        question: "QN8022",
+        trueFalseAnswer: true,
+        isCorrect: true,
+        pointsEarned: 2,
+      },
+      {
+        question: "QN8023",
+        blankAnswer: "Oath of Eorl",
+        isCorrect: true,
+        pointsEarned: 3,
+      },
+    ],
+    submittedAt: new Date("2023-05-17T11:00:00Z"),
+  },
+];
